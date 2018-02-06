@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ModuleController@index')->name('modules');
+Route::resource('module', 'ModuleController', ['except' => [
+    'index'
+]]);
 
-Auth::routes();
+// TODO: Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
