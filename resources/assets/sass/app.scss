@@ -5,5 +5,24 @@
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+// Bulma
+@import "~bulma/bulma";
+
+body, html, #app {
+	height: 100%;
+}
+#app {
+	display: grid;
+	// grid-template-columns: 360px auto;
+	// grid-template-areas: "side main";
+	background: $background;
+	color: $text;
+	& > aside {
+		grid-area: side;
+		background-color: $dark;
+		color: $dark-invert;
+	}
+	& > main {
+		grid-area: main;
+	}
+}
