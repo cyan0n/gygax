@@ -32,7 +32,8 @@ class MapController extends Controller
         $id = $module->maps()->create(request()->all())->id;
         // Save file
         $request->file('map')->storeAs('maps/', $id, 'public');
-        return redirect()->action('ModuleController@show', $module);
+        // TODO: redirect map.edit
+        return redirect()->action('MapController@edit', $module, $map);
     }
 
     /**
@@ -41,9 +42,10 @@ class MapController extends Controller
      * @param  \App\Map  $map
      * @return \Illuminate\Http\Response
      */
-    public function show(Map $map)
+    public function show(Module $module, Map $map)
     {
         //
+        return view('map.edit', compact('map', 'module'));
     }
 
     /**
@@ -52,9 +54,9 @@ class MapController extends Controller
      * @param  \App\Map  $map
      * @return \Illuminate\Http\Response
      */
-    public function edit(Map $map)
+    public function edit(Module $module, Map $map)
     {
-        //
+        return view('map.edit', compact('map', 'module'));
     }
 
     /**
