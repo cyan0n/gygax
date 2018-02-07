@@ -3,28 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Map;
+use App\Module;
 use Illuminate\Http\Request;
 
 class MapController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Module $module)
     {
-        //
+        return view('map.create', compact('module'));
     }
 
     /**
@@ -33,9 +24,15 @@ class MapController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Module $module, Request $request)
     {
-        //
+        $this->validate(request(), [
+            'name' => 'required'
+        ]);
+        $id = $module->maps()->create(request()->all())->id;
+        // Save file
+        $request->file('map')->storeAs('maps/', $id, 'public');
+        return redirect()->action('ModuleController@show', $module);
     }
 
     /**

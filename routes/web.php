@@ -12,7 +12,10 @@
 */
 
 Route::get('/', 'ModuleController@index')->name('modules');
-Route::resource('module', 'ModuleController', ['except' => [
+Route::resource('modules', 'ModuleController', ['except' => [
+    'index'
+]]);
+Route::resource('modules/{module}/maps', 'MapController', ['except' => [
     'index'
 ]]);
 

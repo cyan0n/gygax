@@ -54,10 +54,10 @@ class ModuleController extends Controller
      */
     public function show(Module $module)
     {
-        // Get all modules
-        $maps = Map::all();
+        // Get all maps of module
+        $maps = $module->maps;
 
-        return view('map.index', compact('maps'));
+        return view('map.index', compact('maps', 'module'));
     }
 
     /**
